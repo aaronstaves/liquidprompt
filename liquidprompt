@@ -1582,7 +1582,11 @@ _lp_set_prompt()
     # if change of working directory
     if [[ "$LP_OLD_PWD" != "LP:$PWD" ]]; then
         # Update directory icon for MacOS X
-        $_LP_TERM_UPDATE_DIR
+
+				# Was getting some weird 'bash: : command not found" occassionaly, this fixes it
+        if [[ $_LP_TERM_UPDATE_DIR != ":" ]]; then
+          $_LP_TERM_UPDATE_DIR
+        fi
 
         LP_VCS=""
         LP_VCS_TYPE=""
