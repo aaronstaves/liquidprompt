@@ -1323,6 +1323,12 @@ _lp_reset_runtime()
     # A proper command has been executed if the last command was not related to Liquid Prompt
     [ "$BASH_COMMAND" = _lp_set_prompt ]
     _LP_RUNTIME_COMMAND_EXECUTED=$?
+
+		# Exclude specific commands from the runtime timer
+		# (i.e. don't want to see how long i've been in a vi session
+		if [[ -v LP_RUNTIME_EXCLUDE_COMMAND_REGEX ]] && [[ $BASH_COMMAND  =~ $LP_RUNTIME_EXCLUDE_COMMAND_REGEX ]]; then
+			_LP_RUNTIME_COMMAND_EXECUTED=0
+		fi
 }
 
 if [ "$LP_ENABLE_RUNTIME" = 1 ]
