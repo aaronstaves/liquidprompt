@@ -1326,7 +1326,7 @@ _lp_reset_runtime()
 
 		# Exclude specific commands from the runtime timer
 		# (i.e. don't want to see how long i've been in a vi session
-		if [[ -v LP_RUNTIME_EXCLUDE_COMMAND_REGEX ]] && [[ $BASH_COMMAND  =~ $LP_RUNTIME_EXCLUDE_COMMAND_REGEX ]]; then
+		if [ ! -z $LP_RUNTIME_EXCLUDE_COMMAND_REGEX ] && [[ $BASH_COMMAND  =~ $LP_RUNTIME_EXCLUDE_COMMAND_REGEX ]]; then
 			_LP_RUNTIME_COMMAND_EXECUTED=0
 		fi
 }
